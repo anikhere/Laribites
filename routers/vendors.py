@@ -27,3 +27,20 @@ async def get_vendor_by_id(vendor_id:int):
         return vendor
     else:
         raise HTTPException(status_code=404, detail="Vendor not found")
+@router.put('/vendors_update/{pre}',tags=['Put Method'])
+async def update_vendors(pre:int,new_id:Vendor):
+    if pre in vendors_db:
+        vendors_db[pre] = new_id
+        return vendors_db
+    else:
+        raise HTTPException(status_code=404, detail="Vendor not found")
+@router.delete('/vendors_delete/{v_id}',tags=['delete method'])
+async def delete_vendors(v_id:int):
+    if v_id in vendors_db:
+        del vendors_db[v_id]
+        return vendors_db
+    else:
+        raise HTTPException(status_code=404, detail="Vendor not found")
+
+            
+
